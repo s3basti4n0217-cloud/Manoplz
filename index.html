@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANOPLAZ.INK | Estudio de Tatuajes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        :root {
+            --negro: #0a0a0a;
+            --gris-oscuro: #1a1a1a;
+            --gris-medio: #2d2d2d;
+            --dorado: #b8860b;
+            --dorado-claro: #d4af37;
+            --texto: #e0e0e0;
+            --texto-claro: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--negro);
+            color: var(--texto);
+            line-height: 1.8;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(45,45,45,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(45,45,45,0.3) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--dorado-claro);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        /* Barra de Navegación */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10,10,10,0.95);
+            border-bottom: 1px solid var(--dorado);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: var(--texto);
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+        }
+        
+        nav a:hover {
+            color: var(--dorado-claro);
+            border-color: var(--dorado);
+        }
+        
+        /* Secciones Generales */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .titulo-seccion {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .titulo-seccion::after {
+            content: '✦';
+            display: block;
+            font-size: 1.5rem;
+            color: var(--dorado);
+            margin-top: 0.5rem;
+        }
+        
+        /* Inicio / Hero */
+        #inicio {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 6rem;
+        }
+        
+        .logo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 3px solid var(--dorado);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background: var(--gris-oscuro);
+            box-shadow: 0 0 30px rgba(184,134,11,0.3);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        #inicio h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(212,175,55,0.4);
+        }
+        
+        .subtitulo {
+            font-size: 1.3rem;
+            max-width: 700px;
+            font-style: italic;
+            color: #c0c0c0;
+        }
+        
+        /* Tarjetas y Bloques */
+        .bloque {
+            background: var(--gris-oscuro);
+            border: 1px solid var(--dorado);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .bloque::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid rgba(184,134,11,0.3);
+            pointer-events: none;
+        }
+        
+        /* Galería */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .galeria-item {
+            border: 2px solid var(--dorado);
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+        
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .galeria-item:hover img {
+            transform: scale(1.08);
+        }
+        
+        /* Contacto */
+        .contacto-lista {
+            list-style: none;
+            font-size: 1.1rem;
+        }
+        
+        .contacto-lista li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .contacto-lista li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--dorado);
+            font-size: 0.8rem;
+        }
+        
+        .contacto-lista a:hover {
+            color: var(--dorado-claro);
+        }
+        
+        /* Diferenciador */
+        .diferencia {
+            background: linear-gradient(135deg, var(--gris-oscuro), #252525);
+            border: 2px solid var(--dorado);
+            padding: 3rem;
+            text-align: center;
+        }
+        
+        .diferencia h3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Pie de página */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--dorado);
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        /* Responsividad */
+        @media (max-width: 768px) {
+            #inicio h1 { font-size: 2rem; }
+            nav ul { gap: 0.5rem; }
+            .bloque { padding: 1.5rem; }
+            section { padding: 3rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#quienes">Quiénes Somos</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#precios">Precios</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#diferencia">Diferenciador</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#ubicacion">Ubicación</a></li>
+        </ul>
+    </nav>
+
+    <!-- Inicio -->
+    <section id="inicio">
+        <div class="logo">
+            <!-- Reemplaza esta imagen por tu logo real -->
+            <img src="LOGO JOEL.jpeg" alt="Logo MANOPLAZ.INK">
+        </div>
+        <h1>MANOPLAZ.INK</h1>
+        <p class="subtitulo">Un estudio donde podrás encontrar las expectativas que tiene que tener un tatuaje, al cuidado y siendo acompañados las 24/7</p>
+    </section>
+
+    <!-- Quiénes Somos -->
+    <section id="quienes">
+        <h2 class="titulo-seccion">Quiénes Somos</h2>
+        <div class="bloque">
+            <p>Somos un estudio de tatuajes donde se priorizará al cliente, ayudándolo en todos los cuidados y su acompañamiento, haciendo que el servicio sea único a comparación de cualquier otro estudio que puedas encontrar en cualquier lado.</p>
+            <br>
+            <p>Nuestro propósito es brindarte confianza, seguridad y un trato cercano antes, durante y después de cada sesión.</p>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios">
+        <h2 class="titulo-seccion">Nuestros Servicios</h2>
+        <div class="bloque">
+            <p>Soy un tatuador el cual ofrece un servicio personalizado para cada cliente. No se trata de un simple tatuaje de cliente a tatuador, sino de crear una experiencia grata y memorable para cada persona a la cual le haga una pieza mía.</p>
+            <br>
+            <p>Quiero que recuerdes lo bueno que fue el proceso y que desees volver. Cada diseño se adapta a ti, a tu historia y a lo que quieres expresar.</p>
+        </div>
+    </section>
+
+    <!-- Precios -->
+    <section id="precios">
+        <h2 class="titulo-seccion">Precios y Cotizaciones</h2>
+        <div class="bloque">
+            <p>Los precios se establecen según el diseño, el tamaño, los detalles y el tiempo requerido para cada pieza.</p>
+            <p style="margin-top: 1rem;"><strong>Para obtener información exacta sobre precios:</strong></p>
+            <p>Contacta directamente a través de nuestras redes sociales o por medio de conocidos. Así podremos brindarte una atención personalizada y una cotización justa para tu proyecto.</p>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria">
+        <h2 class="titulo-seccion">Galería de Trabajos</h2>
+        <p style="text-align:center; margin-bottom:2rem;">Algunas de mis piezas realizadas ✦</p>
+        <div class="galeria-grid">
+            <div class="galeria-item"><img src="TATUAJE 2.jpeg" alt="Tatuaje mariposa y luna"></div>
+            <div class="galeria-item"><img src="Tatuaje 3.jpeg" alt="Tatuaje letras góticas"></div>
+            <div class="galeria-item"><img src="Tatuaje 4.jpeg" alt="Tatuaje sol y luna"></div>
+            <div class="galeria-item"><img src="Tatuaje 5.jpeg" alt="Tatuaje rosas y letras"></div>
+            <div class="galeria-item"><img src="Tatuaje 6.jpeg" alt="Tatuaje pecho mariposas"></div>
+            <div class="galeria-item"><img src="Tatuaje 7.jpeg" alt="Diseño personalizado"></div>
+        </div>
+    </section>
+
+    <!-- Elemento Diferenciador -->
+    <section id="diferencia">
+        <h2 class="titulo-seccion">¿Qué nos hace diferentes?</h2>
+        <div class="diferencia">
+            <h3>✦ Acompañamiento Garantizado ✦</h3>
+            <p>El acompañamiento que realizamos para cumplir con cada una de tus expectativas nos hace únicos. Ofrecemos garantías, seguimiento y propuestas que no encontrarás en ningún otro estudio.</p>
+            <br>
+            <p>Estamos contigo desde la primera idea hasta la completa recuperación de tu pieza. No eres un cliente más, eres parte del proceso.</p>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+        <h2 class="titulo-seccion">Contacto</h2>
+        <div class="bloque">
+            <ul class="contacto-lista">
+                <li><strong>WhatsApp:</strong> <a href="https://wa.me/573214347181" target="_blank">+57 321 434 7181</a></li>
+                <li><strong>Instagram:</strong> <a href="https://instagram.com/manoplaz.ink" target="_blank">@manoplaz.ink</a></li>
+                <li><strong>TikTok:</strong> <a href="https://tiktok.com/@manoplaz.ink" target="_blank">@manoplaz.ink</a></li>
+                <li><strong>Correo:</strong> manoplaz.ink@gmail.com</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Ubicación -->
+    <section id="ubicacion">
+        <h2 class="titulo-seccion">Ubicación</h2>
+        <div class="bloque">
+            <p><strong>Colombia — Bogotá</strong></p>
+            <p style="margin-top: 1rem;">Localidad de Engativá<br>Barrio Villa Luz</p>
+            <p style="margin-top: 1rem; font-style: italic;">Contáctame para coordinar la visita.</p>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>MANOPLAZ.INK © 2026 — Todos los derechos reservados</p>
+        <p style="margin-top: 0.5rem;">Bogotá, Colombia ✦ Engativá, Villa Luz</p>
+    </footer>
+
+</body>
+</html>
